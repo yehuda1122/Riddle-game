@@ -4,11 +4,13 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "readline-sync": "^1.4.10"
+  }
 }

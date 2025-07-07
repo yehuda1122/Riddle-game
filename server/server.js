@@ -9,12 +9,13 @@ const server = http.createServer(async (req, res) => {
         try {
             respons = await addFile("./allRiddle.txt");
             console.log('response', respons);
-            res.end("file read")
+            
         }
         catch (err){
             console.error("erorr ", err.message);
             res.end("not read")
         }
+        res.end(JSON.stringify(respons))
 
     }
     else {
