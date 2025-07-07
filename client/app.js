@@ -9,7 +9,7 @@ import person from "./classes/personclass.js";
 import riddle from "./riddles/Riddle.js";
 import readline from "readline-sync"
 
-async function main() {
+export async function main() {
 
     const response = await fetch("http://localhost:3001/riddle");
     const arrRiddle = await response.json();
@@ -35,6 +35,38 @@ async function main() {
     person1.showStat()
 
 }
-main()
+
+export async function addRidlle() {
+    console.log("enter new riddle");
+    const id = readline.question("enter id")
+    const name = readline.question("enter lavel")
+    const taskDescription = readline.question("enter riddle")
+    const correctAnswer = readline.question("enter correct Answer ")
+
+    const newRidlle = {
+        id,
+        name,
+        taskDescription,
+        correctAnswer
+    }
+    try {
+
+        const add = await fetch("http://localhost:3001/riddle", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(newRidlle)
+        })
+        const data = await add.json();
+        console.log("The Riddle added successfully");
+        console.log(data);
+        
+    }
+    catch (err) {
+        console.error(err.message)
+    }
+
+}
+// main()
+addRidlle()
 
 
