@@ -10,7 +10,6 @@ import riddle from "./riddles/Riddle.js";
 import readline from "readline-sync"
 
 export async function main() {
-
     const response = await fetch("http://localhost:3001/riddle");
     const arrRiddle = await response.json();
 
@@ -33,8 +32,8 @@ export async function main() {
 
     // });
     person1.showStat()
-
 }
+
 
 export async function addRidlle() {
     console.log("enter new riddle");
@@ -50,7 +49,6 @@ export async function addRidlle() {
         correctAnswer
     }
     try {
-
         const add = await fetch("http://localhost:3001/riddle", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -58,15 +56,13 @@ export async function addRidlle() {
         })
         const data = await add.json();
         console.log("The Riddle added successfully");
-        console.log(data);
-        
+        console.log(data);    
     }
     catch (err) {
         console.error(err.message)
     }
-
 }
-// main()
-addRidlle()
+main()
+// addRidlle()
 
 

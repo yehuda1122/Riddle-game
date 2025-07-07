@@ -9,12 +9,11 @@ const server = http.createServer(async (req, res) => {
         getFile(res)
     }
     else if (req.method === "POST" && req.url == "/riddle") {
-        addTofile(req,res)
+        addTofile(req, res)
     }
     else {
-        res.end("error")
-
-
+        res.writeHead(405, { "Content-Type": "text/plain" });
+        res.end("Method Not Allowed");
     }
 })
 server.listen(Port, () => {
@@ -26,31 +25,33 @@ async function getFile(res) {
     let respons;
     try {
         respons = await addFile("./allRiddle.txt");
+        res.writeHead(200, { "Content-Type": "application/json" })
+        res.end(JSON.stringify(respons))
     }
     catch (err) {
         console.error("erorr ", err.message);
+        res.writeHead(500, { "Content-Type": "text/plain" })
         res.end("not read")
     }
-    res.end(JSON.stringify(respons))
+
 }
-async function addTofile(req,res) {
+async function addTofile(req, res) {
     let body = ""
-    req.on("data", chunk =>{
-        body += chunk 
+    req.on("data", chunk => {
+        body += chunk
     })
-    req.on("end",async()=>{
+    req.on("end", async () => {
         try {
-        const newRiddle = JSON.parse(body)
-        const update = await writeData("./allRiddle.txt", newRiddle);
-        console.log(update);
-        res.end(JSON.stringify(newRiddle))
-        
-    }
-    catch (err) {
-        console.error("erorr ", err.message);
-        res.end("not updatead")
-    }
-    
+            const newRiddle = JSON.parse(body)
+            const update = await writeData("./allRiddle.txt", newRiddle);
+            res.writeHead(201, { "Content-Type": "application/json" });
+            res.end(JSON.stringify(newRiddle))
+        }
+        catch (err) {
+            console.error("erorr ", err.message);
+            res.writeHead(400, { "Content-Type": "text/plain" })
+            res.end("not updatead")
+        }
     })
 }
 
