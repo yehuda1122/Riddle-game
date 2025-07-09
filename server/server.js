@@ -1,7 +1,6 @@
 import fs from "fs/promises"
 import http from "http"
 import { addFile, writeData, updateData,daleteriddle } from "./riddleDall.js"
-// import { writeData } from "./riddleDall.js";
 
 const Port = 3001;
 const server = http.createServer(async (req, res) => {
@@ -25,7 +24,6 @@ const server = http.createServer(async (req, res) => {
 server.listen(Port, () => {
     console.log(`the server is run: ${Port}`);
 })
-
 
 async function getFile(res) {
     let respons;
@@ -80,7 +78,6 @@ async function chengeData(req, res) {
         }
     })
 }
-
 async function dalletData(req, res) {
     const url = new URL(req.url, `http://"http://localhost:3001`)
     const id = url.searchParams.get("id");

@@ -1,4 +1,4 @@
-import {main,addRidlle,updateRiddle,deletedata} from "./app.js";
+import {plye,addRidlle,updateRiddle,deletedata} from "./app.js";
 import readline from "readline-sync"
 
 function run() {
@@ -6,7 +6,7 @@ function run() {
 
 switch (start) {
     case "1":
-        main()
+        plye()
         break;
     case "2":
         addRidlle()

@@ -13,7 +13,6 @@ async function writeData(path, newData) {
     return ridels
 }
 
-
 async function updateData(path, newData) {
     const data = await fs.readFile(path, { encoding: "utf-8" })
     const riddles = JSON.parse(data)

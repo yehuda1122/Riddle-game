@@ -9,7 +9,7 @@ import person from "./classes/personclass.js";
 import riddle from "./riddles/Riddle.js";
 import readline from "readline-sync"
 
-export async function main() {
+export async function plye() {
     const response = await fetch("http://localhost:3001/riddle");
     const arrRiddle = await response.json();
 
