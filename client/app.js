@@ -56,13 +56,57 @@ export async function addRidlle() {
         })
         const data = await add.json();
         console.log("The Riddle added successfully");
-        console.log(data);    
+        console.log(data);
     }
     catch (err) {
         console.error(err.message)
     }
 }
-main()
-// addRidlle()
 
+export async function updateRiddle() {
+    const idriddle = readline.question("enter id")
+    let itemChenge;
+    const arr = ['name', 'taskDescription', 'correctAnswer'];
+    while (true) {
+        itemChenge = readline.question("enter item to chenge")
+        if (arr.includes(itemChenge)) {
+            break
+        }
+        console.log('not found try egian');
+    }
+    const value = readline.question("enter your chenge")
 
+    try {
+        const update = await fetch("http://localhost:3001/riddle", {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                id: idriddle,
+                field: itemChenge,
+                value: value
+            })
+        })
+        const data = await update.json();
+        console.log("The change added successfully");
+        console.log(data);
+    }
+    catch (err) {
+        console.error(err.message)
+    }
+}
+
+export async function deletedata() {
+
+    const ruddleId = readline.question("enter id")
+    try {
+        const delte = await fetch(`http://localhost:3001/riddle?id=${ruddleId}`, {
+            method: "DELETE",
+            headers: { "Content-Type": "application/json" },
+        })
+        const data = await delte.json()
+        console.log("The riddle delete successfully");
+    }
+    catch (err) {
+        console.error(err.message)
+    }
+}
